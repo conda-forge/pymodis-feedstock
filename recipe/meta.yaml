@@ -6,24 +6,26 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyModis-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pyModis-{{ version }}.tar.gz
   sha256: f3d7f103438780e20ec2b0d2d60b4f4409bea983ff5256c6aa13a260b53245bf
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
+    - setuptools
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - numpy
     - future
     - requests
     - gdal
+    - libgdal-hdf4
     # Not listed but required.
     - unicode-slugify
 
@@ -35,6 +37,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: http://www.pymodis.org
