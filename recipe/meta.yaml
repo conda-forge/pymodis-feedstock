@@ -25,6 +25,7 @@ requirements:
     - future
     - requests
     - gdal
+    - libgdal-hdf4
     # Not listed but required.
     - unicode-slugify
 
